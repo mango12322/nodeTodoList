@@ -5,14 +5,14 @@ const taskSchema = Schema(
   {
     task: {
       type: String,
-      require: true,
+      required: true,
     },
     isComplete: {
       type: Boolean,
-      require: true,
+      required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true } // 등록 시간이 나온다.
 );
 
 const Task = mongoose.model("Task", taskSchema);

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const taskApi = require("./tasksApi");
+const tasksApi = require("./tasksApi");
 
-router.use("/tasks", taskApi);
+router.use("/tasks", tasksApi);
 
 module.exports = router;
