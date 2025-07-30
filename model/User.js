@@ -35,6 +35,8 @@ userSchema.methods.generateToken = function () {
 userSchema.methods.toJSON = function () {
   const obj = this._doc;
   delete obj.password; // 패스워드 빼고 보내기
+  delete obj.__v;
+  delete obj.updatedAt;
 
   return obj;
 };

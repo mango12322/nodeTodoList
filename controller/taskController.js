@@ -5,7 +5,8 @@ const taskController = {};
 taskController.createTask = async (req, res) => {
   try {
     const { task, isComplete } = req.body;
-    const newTask = new Task({ task, isComplete });
+    const userId = req.userId;
+    const newTask = new Task({ task, isComplete, author: userId });
     await newTask.save();
     res.status(200).json({ status: "Success", data: newTask });
   } catch (err) {
@@ -15,8 +16,9 @@ taskController.createTask = async (req, res) => {
 
 taskController.getTask = async (req, res) => {
   try {
-    // 1. DB 안에서 가져오기
-    const taskList = await Task.find({});
+    // 1. DB 안에서 가져오기 pupulate: 참조하는 테이블 정보를 객체로 가져오기?
+    const taskList = await Task.find({}).populate("author");
+
     res.status(200).json({ status: "success", data: taskList });
   } catch (err) {
     res.status(400).json({ status: "getFail", error: err });
