@@ -49,13 +49,15 @@ userController.loginWithEmail = async (req, res) => {
   }
 };
 
-userController.getUser = async (req, routes) => {
+userController.getUser = async (req, res) => {
   try {
-    const { userId } = req.userId;
-    const user = User.findById(userId);
+    const userId = req.userId;
+    const user = await User.findById(userId);
+
     if (!user) {
       throw new Error("유저를 찾지 못했습니다.");
     }
+
     res.status(200).json({ status: "성공", user });
   } catch (err) {
     res.status(400).json({
